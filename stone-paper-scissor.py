@@ -1,24 +1,43 @@
 import random
 
-def play():
-    print("Welcome to Stone-Paper-Scissors!")
-    print("Enter your choice: stone, paper, or scissor")
-    
-    user = input("Your choice: ").lower()
-    choices = ["stone", "paper", "scissor"]
-    computer = random.choice(choices)
-    
-    print(f"Computer chose: {computer}")
-    
-    if user == computer:
-        print("It's a tie!")
-    elif (user == "stone" and computer == "scissor") or \
-         (user == "paper" and computer == "stone") or \
-         (user == "scissor" and computer == "paper"):
-        print("You win!")
-    elif user in choices:
-        print("Computer wins!")
-    else:
-        print("Invalid input. Please choose stone, paper, or scissor.")
+user_wins = 0
+computer_wins = 0
 
-play()
+options = ["rock", "paper", "scissors"]
+
+while True:
+    user_input = input("Type rock/paper/scissors or quit: ").lower()
+    if user_input == "quit":
+        break
+        
+    if user_input not in options:
+        continue
+    
+    random_number = random.randint(0, 2)
+    # rock: 0, paper: 1, scissors: 2
+    computer_pick = options[random_number]
+    print("Computer picked", computer_pick + ".")
+
+    if user_input == "rock" and computer_pick == "scissors":
+        print("You won!")
+        user_wins += 1
+
+    elif user_input == "paper" and computer_pick == "rock":
+        print("You won!")
+        user_wins += 1
+
+    elif user_input == "scissors" and computer_pick == "paper":
+        print("You won!")
+        user_wins += 1
+
+    elif user_input == computer_pick:
+        print("It's a tie!")
+        
+    else:
+        print("You lost!")
+        computer_wins += 1
+
+print("You won", user_wins, "times.")
+print("The computer won", computer_wins, "times.")
+
+
